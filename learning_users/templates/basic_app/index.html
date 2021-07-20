@@ -1,0 +1,49 @@
+{% extends 'basic_app/base.html' %}
+{% load static %}
+
+{% block body_block %}
+    {% if request.user.is_authenticated %}
+    <div class="w3-container">
+      <h1 class="w3-center w3-animate-left">HELLO {{ request.user.username }}</h1>
+      <h3 class="w3-center w3-animate-left">WELCOME TO THE DIGITAL SPACE</h3>
+    </div>
+    <div class="w3-container">
+      <form class="w3-center w3-animate-left" action="." method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button class="btn btn-success btn-l type="submit">upload videos</button>
+      </form>
+      <p></p>
+      <form class="w3-center w3-animate-left" action="." method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{formim.as_p}}
+        <button type="submit" class="btn btn-lg btn-success">Upload images</button></form>
+      <p></p>
+      <form class="w3-center w3-animate-left" action="." method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{formdoc.as_p}}
+        <button type="submit" class="btn btn-lg btn-success">Upload docs</button></form>
+    </div>
+    <hr>
+    {% for x in all %}
+        <h3 class="text-center mt-2 mb-2">{{x.caption}}</h3>
+        <video class="embed-responsive embed-responsive-16by9" controls="controls">
+            <source src="{{x.video.url}}" type="video/mp4" /></video>
+    {% endfor %}
+
+    {% for x in obj %}
+      <h3 class="text-center mt-2 mb-2">{{x.captionim}}</h3>
+      <img src="{{x.image.url}}" height="70%" width="70%" class="img-thumbnail" alt="...">
+    {% endfor %}
+
+    {% for x in alldoc %}
+      <h3 class="text-center mt-2 mb-2">{{x.captiondoc}}</h3>
+      <iframe src="{{x.docs.url}}" height="200" width="300"></iframe>
+    {% endfor %}
+
+    {% else %}
+    <div class="w3-container">
+      <h1 class="w3-center w3-animate-left">WELCOME TO AKN DRIVE</h1>
+    {% endif %}
+  {% endblock %}
+</div>

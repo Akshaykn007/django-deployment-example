@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  </head>
+  <body>
+    <nav class = "navbar navbar-light bg-light">
+      <div class="w3-bar w3-light Cornsilk">
+        <ul class = 'nav navbar-nav'>
+          <li><a class="w3-bar-item w3-button w3-mobile" href="{% url 'index' %}" hover=>Home</a></li>
+          <li><a class="w3-bar-item w3-button w3-mobile" href="{% url 'admin:index' %}">Admin</a></li>
+          <li><a class="w3-bar-item w3-button w3-mobile" href="{% url 'basic_app:register' %}">Register</a></li>
+
+        {% if user.is_authenticated %}
+            <li><a class="w3-bar-item w3-button w3-mobile" href="{% url 'logout' %}">Logout</a></li>
+        {% else %}
+            <li><a class="w3-bar-item w3-button w3-mobile" href="{% url 'basic_app:user_login' %}">Login</a></li>
+        {% endif %}
+        </ul>
+
+      </div>
+
+    </nav>
+    <div style="background-image:url('https://images.pexels.com/photos/82256/pexels-photo-82256.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500');">
+      {% block body_block %}
+      {% endblock %}
+
+    </div>
+
+
+  </body>
+</html>
